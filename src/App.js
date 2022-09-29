@@ -53,6 +53,36 @@ function App() {
     })
   }
 
+  // remover produto
+
+  const remover = () => {
+    fetch('http://localhost:8080/remover/'+objProduto.codigo, {
+      method:'delete',
+      body:JSON.stringify(objProduto),
+      headers:{
+        'Content-type':'application/json',
+        'Accept':'application/json'
+      }
+    })
+    .then(retorno => retorno.json())
+    .then(retorno_convertido =>{
+      alert(retorno_convertido.mensagem)
+
+      let vetTemp = [...produtos]
+      let indice = vetTemp.findIndex((p)=>{
+        return p.codigo === objProduto.codigo;
+      })
+
+      vetTemp.splice(indice, 1)
+
+      setProdutos(vetTemp);
+
+      //Limpar formulario
+      limparFormulario()
+
+    })
+  }
+
   // limpar form
   const limparFormulario = () => {
     setObjProduto(produto)
@@ -68,7 +98,7 @@ function App() {
   return (
     <div>
       <p>{JSON.stringify(objProduto)}</p>
-      <Form botao={btnCadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} obj={objProduto} 
+      <Form botao={btnCadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} obj={objProduto} remover={remover} 
       cancelar={limparFormulario}/>
       <Table vetor={produtos} selecionar={selecionarProduto}/>
     </div>
