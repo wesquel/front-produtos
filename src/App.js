@@ -54,16 +54,23 @@ function App() {
   }
 
   // limpar form
-
   const limparFormulario = () => {
     setObjProduto(produto)
+    setBtnCadastrar(true)
+  }
+
+  //Selecionar produto
+  const selecionarProduto = (indice) => {
+    setObjProduto(produtos[indice]);
+    setBtnCadastrar(false);
   }
 
   return (
     <div>
       <p>{JSON.stringify(objProduto)}</p>
-      <Form botao={btnCadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} obj={objProduto}/>
-      <Table vetor={produtos}/>
+      <Form botao={btnCadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} obj={objProduto} 
+      cancelar={limparFormulario}/>
+      <Table vetor={produtos} selecionar={selecionarProduto}/>
     </div>
   );
 }
