@@ -48,14 +48,21 @@ function App() {
       }else{
         setProdutos([...produtos, retorno_convertido])
         alert('Produto cadastrado com sucesse')
+        limparFormulario();
       }
     })
+  }
+
+  // limpar form
+
+  const limparFormulario = () => {
+    setObjProduto(produto)
   }
 
   return (
     <div>
       <p>{JSON.stringify(objProduto)}</p>
-      <Form botao={btnCadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar}/>
+      <Form botao={btnCadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} obj={objProduto}/>
       <Table vetor={produtos}/>
     </div>
   );

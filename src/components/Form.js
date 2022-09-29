@@ -1,10 +1,10 @@
-function Form({botao, eventoTeclado, cadastrar}){
+function Form({botao, eventoTeclado, cadastrar, obj}){
     return (
         <form>
-            <input name="nome" type='text' onChange={eventoTeclado} 
+            <input name="nome" value={obj.nome} type='text' onChange={eventoTeclado} 
             placeholder="Nome" className="form-control"/>
 
-            <input name= "marca" type='text' onChange={eventoTeclado} 
+            <input name= "marca" value={obj.marca} type='text' onChange={eventoTeclado} 
             placeholder="Marca" className="form-control"/>
             {
                 botao?
