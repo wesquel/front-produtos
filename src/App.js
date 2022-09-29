@@ -83,6 +83,35 @@ function App() {
     })
   }
 
+  //Alterar produto
+
+  const alterar = () => {
+    fetch('http://localhost:8080/alterar', {
+      method:'put',
+      body:JSON.stringify(objProduto),
+      headers:{
+        'Content-type':'application/json',
+        'Accept':'application/json'
+      }
+    })
+    .then(retorno => retorno.json())
+    .then(retorno_convertido =>{
+      if(retorno_convertido.mensagem !== undefined){
+        alert(retorno_convertido.mensagem)
+      }else{
+        alert('Produto alterado com sucesse')
+        let vetTemp = [...produtos]
+        let indice = vetTemp.findIndex((p)=>{
+          return p.codigo === objProduto.codigo;
+        })
+
+        vetTemp[indice] = objProduto
+        setProdutos(vetTemp);
+        limparFormulario();
+      }
+    })
+  }
+
   // limpar form
   const limparFormulario = () => {
     setObjProduto(produto)
@@ -98,8 +127,8 @@ function App() {
   return (
     <div>
       <p>{JSON.stringify(objProduto)}</p>
-      <Form botao={btnCadastrar} eventoTeclado={aoDigitar} cadastrar={cadastrar} obj={objProduto} remover={remover} 
-      cancelar={limparFormulario}/>
+      <Form botao={btnCadastrar} alterar={alterar} eventoTeclado={aoDigitar} 
+      cadastrar={cadastrar} obj={objProduto} remover={remover} cancelar={limparFormulario}/>
       <Table vetor={produtos} selecionar={selecionarProduto}/>
     </div>
   );

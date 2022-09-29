@@ -1,4 +1,4 @@
-function Form({botao, eventoTeclado, cadastrar, obj, cancelar, remover}){
+function Form({botao, eventoTeclado, cadastrar, obj, cancelar, remover, alterar}){
     return (
         <form>
             <input name="nome" value={obj.nome} type='text' onChange={eventoTeclado} 
@@ -11,7 +11,7 @@ function Form({botao, eventoTeclado, cadastrar, obj, cancelar, remover}){
                 <input className="btn btn-primary" type='button' onClick={cadastrar} value="Cadastrar"/>
                 :
                 <div>
-                    <input className="btn btn-warning" type='button' value="Alterar"/>
+                    <input onClick={alterar} className="btn btn-warning" type='button' value="Alterar"/>
                     <input onClick={remover} className="btn btn-danger" type='button' value="Remover"/>
                     <input onClick={cancelar} className="btn btn-secondary" type='button' value="Cancelar"/>    
                 </div> 
